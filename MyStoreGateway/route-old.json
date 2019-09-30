@@ -1,0 +1,50 @@
+﻿{
+    "ReRoutes": [
+        {
+            "DownstreamPathTemplate": "/catalogapi/{everything}",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/catalogapi/{everything}",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 6001
+                },
+                {
+                    "Host": "localhost",
+                    "Port": 6002
+                }
+            ],
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/cartapi/{everything}",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/cartapi/{everything}",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7001
+                },
+                {
+                    "Host": "localhost",
+                    "Port": 7002
+                }
+            ],
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection"
+            }
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:5001",
+        "ServiceDiscoveryProvider": {
+            "Host": "localhost",
+            "Port": 8500,
+            "Type": "Consul"
+        }
+    }
+}
